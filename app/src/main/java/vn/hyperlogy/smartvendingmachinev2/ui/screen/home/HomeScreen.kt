@@ -6,28 +6,18 @@ import androidx.compose.material3.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.*
 import androidx.compose.ui.unit.dp
 
 import androidx.compose.foundation.pager.HorizontalPager
 import kotlinx.coroutines.delay
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.PagerState
-import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.Alignment
 import coil.compose.AsyncImage
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 import androidx.compose.foundation.pager.rememberPagerState
 import vn.hyperlogy.smartvendingmachinev2.ui.component.AutoScrollList
-import vn.hyperlogy.smartvendingmachinev2.ui.component.Product
+import vn.hyperlogy.smartvendingmachinev2.model.*
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,42 +25,798 @@ import vn.hyperlogy.smartvendingmachinev2.ui.component.Product
 fun HomeScreen() {
 
     val products = listOf(
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 1", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 2", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 3", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-        Product("Sản phẩm 4", "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 1",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 2",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 3",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        ),
+        Product(
+            name = "Sản phẩm 4",
+            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+            slotNo = 1,
+            stock = 5,
+            quantity = 5,
+            slotNumber = "AA",
+            price = 5000,
+            keyNum = "AA",
+            id = "ewdasdasda"
+        )
     )
 
     Scaffold(
@@ -88,7 +834,11 @@ fun HomeScreen() {
                         "https://thiepmung.com/images/theme/tai-hinh-nen-hoang-hon-lang-man-cho-may-tinh56444315a1f24.jpg"
                     )
                 )
-                AutoScrollList(products, true)
+                AutoScrollList(
+                    products = products,
+                    isAutoScrollEnabled = true,
+                    scrollIntervalMillis = 100L
+                )
 
             }
         }

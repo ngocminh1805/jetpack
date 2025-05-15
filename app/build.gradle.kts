@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.accompanist.pager)
     implementation(libs.coil.compose)
+    implementation (libs.androidx.navigation.compose)
 
 
     testImplementation(libs.junit)
