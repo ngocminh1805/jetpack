@@ -1,4 +1,4 @@
-package vn.hyperlogy.smartvendingmachinev2.ui.component
+package vn.hyperlogy.smartvendingmachinev2.ui.screen.home.component
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

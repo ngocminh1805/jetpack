@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import vn.hyperlogy.smartvendingmachinev2.ui.navigation.MainNavigation
 import vn.hyperlogy.smartvendingmachinev2.ui.screen.home.HomeScreen
 import vn.hyperlogy.smartvendingmachinev2.ui.theme.SmartVendingMachinev2Theme
 
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SmartVendingMachinev2Theme {
-                HomeScreen()
+                MainNavigation()
             }
         }
     }
