@@ -24,7 +24,7 @@ import vn.hyperlogy.smartvendingmachinev2.model.*
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun AutoScrollList(
-    products: List<Product>,
+    products: List<ProductMapItem>,
     isAutoScrollEnabled: Boolean,
     modifier: Modifier = Modifier,
     scrollIntervalMillis: Long = 3000L

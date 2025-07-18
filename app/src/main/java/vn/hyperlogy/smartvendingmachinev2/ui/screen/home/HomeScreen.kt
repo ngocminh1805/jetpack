@@ -6,31 +6,31 @@ import androidx.compose.material3.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.rememberNavController
-import vn.hyperlogy.smartvendingmachinev2.data.example.ProductExample
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
 
 import vn.hyperlogy.smartvendingmachinev2.ui.screen.home.component.AutoScrollList
-import vn.hyperlogy.smartvendingmachinev2.model.*
 import vn.hyperlogy.smartvendingmachinev2.ui.navigation.NavigationRoutes
 import vn.hyperlogy.smartvendingmachinev2.ui.screen.home.component.AdBannerCarousel
 import vn.hyperlogy.smartvendingmachinev2.ui.screen.home.component.StatusBar
-import vn.hyperlogy.smartvendingmachinev2.utils.LocalAppNavController
+import vn.hyperlogy.smartvendingmachinev2.core.LocalAppNavController
+import vn.hyperlogy.smartvendingmachinev2.ui.screen.home.component.CartModal
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
     val navController = LocalAppNavController.current
+    val productList by viewModel.productList.collectAsState()
+    val isModalOpen by viewModel.isModalOpen.collectAsState()
+
+    LaunchedEffect(Unit) {
+        delay(10000)
+        viewModel.loadProducts()
+    }
 
     Scaffold(
         topBar = { StatusBar() },
-        floatingActionButton = {
-            FloatingActionButton(onClick = {
-                navController.navigate(
-                    NavigationRoutes.Setting.name
-                )
-            }){ }
-        },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -45,7 +45,7 @@ fun HomeScreen() {
                     )
                 )
                 AutoScrollList(
-                    products = ProductExample().products,
+                    products = productList,
                     isAutoScrollEnabled = true,
                     scrollIntervalMillis = 100L
                 )
@@ -53,6 +53,8 @@ fun HomeScreen() {
             }
         }
     )
+
+    CartModal(isModalOpen)
 }
 
 

@@ -22,24 +22,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import vn.hyperlogy.smartvendingmachinev2.model.Product
+import vn.hyperlogy.smartvendingmachinev2.model.ProductMapItem
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
-fun ProductCard(product: Product, modifier: Modifier = Modifier) {
+fun ProductCard(product: ProductMapItem, modifier: Modifier = Modifier) {
 
-    BoxWithConstraints (modifier = modifier) {
-        val imageHeight = maxHeight * 2/3
-        val imageWidth = maxWidth * 2/3
+    BoxWithConstraints(modifier = modifier) {
+        val imageHeight = maxHeight * 2 / 3
+        val imageWidth = maxWidth * 2 / 3
 
         Column(
             modifier = modifier
                 .background(Color(0xFFF5F5F5), shape = RoundedCornerShape(12.dp))
                 .padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        ) {;
             AsyncImage(
-                model = product.imageUrl,
-                contentDescription = product.name,
+                model = "https://app.smartvendingmachines.net/files/image/" + product.product?.imageDetail,
+                contentDescription = product.product?.name,
                 contentScale = ContentScale.Inside,
                 modifier = Modifier
                     .height(imageHeight)
@@ -50,14 +51,14 @@ fun ProductCard(product: Product, modifier: Modifier = Modifier) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Row(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "Price: ",
+                           text = "Price: ",
                         style = MaterialTheme.typography.titleSmall,
                         color = Color.Black
                     )
                 }
             }
             Text(
-                text = product.name,
+                text = product.product?.name ?: "",
                 style = MaterialTheme.typography.titleSmall,
                 color = Color.Black
             )
@@ -66,20 +67,8 @@ fun ProductCard(product: Product, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ProductItemPreview() {
-    ProductCard(
-        product = Product(
-            name = "test",
-            imageUrl = "https://images.pexels.com/photos/24860314/pexels-photo-24860314/free-photo-of-ly-c-c-chen-kinh.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            price = 100000,
-            id = "sdasdasdasd",
-            slotNo = 1,
-            keyNum = "AA",
-            quantity = 5,
-            stock = 5,
-            slotNumber = "AA"
-        )
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ProductItemPreview() {
+//
+//}

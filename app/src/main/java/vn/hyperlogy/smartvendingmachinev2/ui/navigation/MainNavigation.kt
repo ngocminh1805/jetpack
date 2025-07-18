@@ -2,13 +2,12 @@ package vn.hyperlogy.smartvendingmachinev2.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import vn.hyperlogy.smartvendingmachinev2.ui.screen.home.HomeScreen
 import vn.hyperlogy.smartvendingmachinev2.ui.screen.setting.SettingScreen
-import vn.hyperlogy.smartvendingmachinev2.utils.LocalAppNavController
+import vn.hyperlogy.smartvendingmachinev2.core.LocalAppNavController
 
 
 @Composable

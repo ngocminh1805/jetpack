@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -56,6 +58,19 @@ dependencies {
     implementation(libs.accompanist.pager)
     implementation(libs.coil.compose)
     implementation (libs.androidx.navigation.compose)
+
+    // serial port
+    implementation (libs.android.serialport)
+    implementation (libs.hardwareutils)
+
+
+    implementation (libs.rxjava)
+    implementation (libs.rxandroid)
+
+    // gson - xử lý json
+    implementation(libs.gson)
+
+
 
 
     testImplementation(libs.junit)
